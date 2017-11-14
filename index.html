@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>畫布</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <html>
+
+    <head>
+        <style type="text/css">
+            
+        </style>
+    </head>
+
+    <body>
+        <div id="container">
+            <canvas id="canvas1" width="400" height="300" ></canvas>
+            <canvas id="canvas2" width="400" height="300" ></canvas>
+            <canvas id="canvas3" width="400" height="300" ></canvas>
+        </div>
+        <script>
+            var elem = document.getElementById('canvas1').getContext('2d');
+            var elem2 = document.getElementById('canvas2').getContext('2d');
+            var elem3 = document.getElementById('canvas3').getContext('2d');
+            var w = "400";
+            var h = "300";
+            var position=[];
+            var position2=[];
+			/*canvas1*/
+            function drawShape() {
+                position.push({ "x": w / 2, "y": h / 2, "moveX": 5 - 10 * Math.random(), "moveY": 5 - 10 * Math.random(), "size": parseInt(Math.random() * 25) })
+                var my_gradient = elem.createLinearGradient(0, 0, 170, 0);
+                my_gradient.addColorStop(0, "#b73a9e");
+                my_gradient.addColorStop(0.5, "#673ab7");
+                my_gradient.addColorStop(1, "#03a9f4");
+                elem.clearRect(0, 0, w, h);
+                elem.fillStyle = "white"
+                elem.fillRect(0, 0, w, h);
+                elem.fillStyle = my_gradient
+                elem.font = "60px Georgia";
+                elem.fillText("hello ",10,50)
+                a = Math.floor(Math.random() * 255);
+                b = Math.floor(Math.random() * 255);
+                c = Math.floor(Math.random() * 255);
+                for(var i=0;i<position.length;i++){
+                    elem.beginPath();
+                    elem.arc(position[i].x, position[i].y, position[i].size, 0, 2 * Math.PI, false);
+                    elem.fill();
+                    position[i].x += position[i].moveX*0.5
+                    position[i].y += position[i].moveY*0.5
+                }
+				
+            }      
+			/*canvas2*/
+            function drawShape2() {
+                for (var a = 0; a < 100; a++) {
+                    position2.push({ "x": w / 2, "y": h / 2, "moveX": 5 - 10 * Math.random(), "moveY": 5 - 10 * Math.random(), "size": parseInt(Math.random() * 25) })
+                }
+               var my_gradient = elem2.createLinearGradient(0, 0, 170, 0);
+                my_gradient.addColorStop(0, "#b73a9e");
+                my_gradient.addColorStop(0.5, "#673ab7");
+                my_gradient.addColorStop(1, "#03a9f4");
+                elem2.clearRect(0, 0, w, h);
+                elem2.fillStyle = "white"
+                elem2.fillRect(0, 0, w, h);
+                elem2.fillStyle = my_gradient
+                elem2.font = "60px Georgia";
+                elem2.fillText("hello 我是子涵",10,50)
+                a = Math.floor(Math.random() * 255);
+                b = Math.floor(Math.random() * 255);
+                c = Math.floor(Math.random() * 255);
+				
+                for(var i=0;i<10;i++){
+                    elem2.beginPath();
+                    elem2.arc(position2[i].x, position2[i].y, position2[i].size, 0, 2 * Math.PI, false);
+                    elem2.fill();
+                    position2[i].x += position2[i].moveX*0.5
+                    position2[i].y += position2[i].moveY*0.5
+                    if(position2[i].x>=w){
+                        position2[i].moveX = -position2[i].moveX 
+                    }
+                    if(position2[i].y>=h){
+                        position2[i].moveY = -position2[i].moveY 
+                    }
+                    if(position2[i].y<=0){
+                        position2[i].moveY = -position2[i].moveY 
+                    }
+                    if(position2[i].x<=0){
+                        position2[i].moveX = -position2[i].moveX 
+                    }
+                }
+            }
+            function rendTime(){
+                var now = new Date()
+                var time = now.toLocaleTimeString();
+                var hour = now.getHours();
+                var minutes = now.getMinutes();
+                var second = now.getSeconds();
+                var millSeconds = now.getMilliseconds();
+                var newSecond = second + (millSeconds/1000);
+                elem3.clearRect(0, 0, w, h);
+                elem3.lineWidth=8;
+                elem3.fillStyle = "white"
+                elem3.fillRect(0, 0, w, h);
+                elem3.fillStyle = "black"
+                //hours
+                elem3.beginPath();
+                elem3.arc(150, 125, 100, -Math.PI / 2, (Math.PI*hour)/12- Math.PI/8)
+                elem3.stroke();
+                //mins
+                elem3.beginPath();
+                elem3.arc(150, 125, 75, -Math.PI / 2, (Math.PI * minutes) / 30 - Math.PI /4)
+                elem3.stroke();
+                //second
+                elem3.beginPath();
+                elem3.arc(150, 125, 50, (-Math.PI)/2, (Math.PI * newSecond) / 100 - Math.PI / 4)
+                elem3.stroke();
+
+                elem3.font="20px Georgia"
+                elem3.fillStyle = "black"
+                elem3.fillText(hour+":"+ minutes+":"+ second, 120, 130)
+            }
+
+    
+            $(document).ready(function () {
+               setInterval("drawShape()", 10);
+               setInterval("drawShape2()", 10);
+               setInterval("rendTime()", 40);
+            });
+            
+        </script>
+    </body>
+</html>
