@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>畫布</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <html>
+
+    <head>
+        <style type="text/css">
+            
+        </style>
+    </head>
+
+    <body>
+        <div id="container">
+            <canvas id="canvas1" width="400" height="300" ></canvas>
+        </div>
+        <script>
+            var elem = document.getElementById('canvas1').getContext('2d');
+            var w = "400";
+            var h = "300";
+            var position=[];
+            function run(){
+                for(var a=0;a<20;a++){
+                    position.push({"x":w/2,"y":h/2,"moveX": 5 -10*Math.random(),"moveY": 5- 10 * Math.random(),"size":parseInt(Math.random()*25)})
+                }
+                drawShape()
+            }
+            function drawShape() {
+                var my_gradient = elem.createLinearGradient(0, 0, 170, 0);
+                my_gradient.addColorStop(0, "#b73a9e");
+                my_gradient.addColorStop(0.5, "#673ab7");
+                my_gradient.addColorStop(1, "#03a9f4");
+                elem.clearRect(0, 0, w, h);
+                elem.fillStyle = "white"
+                elem.fillRect(0, 0, w, h);
+                elem.fillStyle = my_gradient
+                elem.font = "60px Georgia";
+                elem.fillText("hello ",10,50)
+                a = Math.floor(Math.random() * 255);
+                b = Math.floor(Math.random() * 255);
+                c = Math.floor(Math.random() * 255);
+                
+                for(var i=0;i<10;i++){
+                    elem.beginPath();
+                    elem.arc(position[i].x, position[i].y, position[i].size, 0, 2 * Math.PI, false);
+                    //elem.fillStyle = "rgba(" + a + "," + b + ", " + c + ",0.7)";
+                    elem.fill();
+                    position[i].x += position[i].moveX*0.5
+                    position[i].y += position[i].moveY*0.5
+                    if(position[i].x>=w){
+                        position[i].moveX = -position[i].moveX 
+                    }
+                    if(position[i].y>=h){
+                        position[i].moveY = -position[i].moveY 
+                    }
+                    if(position[i].y<=0){
+                        position[i].moveY = -position[i].moveY 
+                    }
+                    if(position[i].x<=0){
+                        position[i].moveX = -position[i].moveX 
+                    }
+                }
+            }
+            $(document).ready(function () {
+                setInterval("run()", 10);
+            });
+            
+        </script>
+    </body>
+</html>

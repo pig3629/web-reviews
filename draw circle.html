@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>畫布</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <html>
+
+    <head>
+        <style type="text/css">
+            
+        </style>
+    </head>
+
+    <body>
+        <div id="container">
+            <canvas id="canvas1" width="400" height="300" ></canvas>
+        </div>
+        <script>
+            var elem = document.getElementById('canvas1').getContext('2d');
+            function run(){
+                x = Math.random() * 400
+                y = Math.random() * 300
+                elem.clearRect(0, 0, 400, 300);
+                drawShape(x, y);
+            }
+            function drawShape(x, y) {
+                elem.font = "60px Georgia";
+                elem.fillText("Hello World!", 10, 90);
+                a = Math.floor(Math.random() * 255);
+                b = Math.floor(Math.random() * 255);
+                c = Math.floor(Math.random() * 255);
+                elem.beginPath();
+                elem.arc(x, y, 30, 0, 2 * Math.PI, false);
+                elem.fillStyle = "rgba(" + a + "," + b + ", " + c + ", 0.7)";
+                elem.fill();
+            }
+            $(document).ready(function () {
+                setInterval("run()", 150);
+            });
+            
+        </script>
+    </body>
+</html>

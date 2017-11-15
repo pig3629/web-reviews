@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>畫布</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <html>
+
+    <head>
+        <style type="text/css">
+            
+        </style>
+    </head>
+
+    <body>
+        <div id="container">
+            <canvas id="canvas1" width="400" height="300" ></canvas>
+        </div>
+        <script>
+            var elem = document.getElementById('canvas1').getContext('2d');
+            var grd = elem.createLinearGradient(0, 0, 0, 170);
+                grd.addColorStop(0, "#b73a9e");
+                grd.addColorStop(0.5, "#673ab7");
+                grd.addColorStop(1, "#03a9f4");
+            elem.fillStyle= grd
+            var position =[];
+            function rang(){
+                var y = Math.floor(-Math.random() * 100) - 100
+                var randY = Math.floor(Math.random() * 100) + 200
+                elem.beginPath();
+               
+                elem.fillRect(200, 200, 30, y);
+                 y += randY * -10
+                //elem.fillRect(200, 200, 30, y);
+                elem.stroke();
+                console.log(y)
+            }
+            $(document).ready(function () {
+                setInterval("rang()", 10);
+            });
+        </script>
+    </body>
+</html>

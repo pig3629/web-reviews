@@ -6,22 +6,59 @@
     <title>畫布</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+<style>
+    .A1{
+        width: 1900px;
+        margin: 0 auto;
+        height:450px;
+        padding:40px;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center center;
+        background-size: cover;
+    }
+    .section1{
+        color:#fff;
+        background-image: url('image1.jpg');
+    }
+    .section2{
+        background-image: url('image2.jpg');
+    }
+    #bannerText {
+        position: fixed;
+        text-align: center;
+        width: 100%;
+        margin-top: 150px;
+    }
+    #bannerText > h2{
+        text-align: center;
+        color: #fff;
+        font-size: 64px;
+        top:250px;
+        display: block;
+        text-shadow: 0 0 8px rgba(0,0,0,.3);
+        padding: 0 0px;
+    }
+</style>
 </head>
 
 <body>
     <html>
-
-    <head>
-        <style type="text/css">
-            
-        </style>
-    </head>
-
     <body>
         <div id="container">
             <canvas id="canvas1" width="400" height="300" ></canvas>
             <canvas id="canvas2" width="400" height="300" ></canvas>
             <canvas id="canvas3" width="400" height="300" ></canvas>
+        </div>
+        <div>
+            <div class="A1 section1" style="background-position: center 0px;">
+                <div id="bannerText">
+                    <h2 style="font-size: 64px;">CLEAN &amp; RESPONSIVE</h2>
+                </div>
+            </div>
+            <div class="A1 section2" style="background-position: center 0px;">
+                <h2 style="font-size: 64px;margin-top: 200px;opacity:1;">CLEAN &amp; RESPONSIVE</h2>
+            </div>
         </div>
         <script>
             var elem = document.getElementById('canvas1').getContext('2d');
@@ -131,6 +168,23 @@
                setInterval("drawShape()", 10);
                setInterval("drawShape2()", 10);
                setInterval("rendTime()", 40);
+                var header = $('#bannerText > h2');
+                var range = 200;
+                $(window).on('scroll', function () {
+
+                    var scrollTop = $(this).scrollTop(),
+                        height = header.outerHeight(),
+                        offset = height / 2,
+                        calc = 1 - (scrollTop - offset + range) / range;
+
+                    if (calc > '1') {
+                        header.css({ 'opacity': 1 });
+                    } else if (calc < '0') {
+                        header.css({ 'opacity': calc+0.6 });
+                    } else{
+                        header.css({ 'opacity': 1 });
+                    }
+                });
             });
             
         </script>
