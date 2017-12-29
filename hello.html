@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>畫布</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+<style>
+    .A1{
+        margin: 0 auto;
+        height:450px;
+        padding:40px;
+        background-position: 0 0;
+        background-size: cover;
+    }
+    .section1{
+        color:#fff;
+        background-image: url('image1.jpg');
+    }
+    .section2{
+        background-image: url('image2.jpg');
+    }
+    .section3{
+        background-image: url('image3.jpg');
+    }
+    #bannerText {
+        position: fixed;
+        text-align: center;
+        width: 100%;
+        margin-top: 150px;
+    }
+    #bannerText > h2{
+        text-align: center;
+        color: #fff;
+        font-size: 64px;
+        top:250px;
+        display: block;
+        text-shadow: 0 0 8px rgba(0,0,0,.3);
+        padding: 0 0px;
+    }
+
+ 
+</style>
+</head>
+
+<body>
+    <html>
+    <body>
+        <div>
+            <div class="A1 section1"  >
+            </div>
+            <div class="A1 section2" >
+
+            </div>
+            <div class="A1 section3" >
+            </div>
+        </div>
+        <script>
+            $(document).ready(function () {
+                var header = $('#bannerText > h2');
+                var img = $('.section1');
+                var img2 = $('.section2');
+                var img3 = $('.section3');
+                var range = 200;
+                $(window).on('scroll', function () {
+
+                    var scrollTop = $(this).scrollTop(),
+                        height = header.outerHeight(),
+                        offset = height / 2,
+                        calc = 1 - (scrollTop - offset + range) / range;
+
+                    img.css({ 'background-position-y': 0 - scrollTop });
+                    img2.css({ 'background-position-y':  0 -scrollTop });
+                    img3.css({ 'background-position-y':  0 +scrollTop });
+
+                });
+
+            });
+
+        </script>
+    </body>
+</html>
